@@ -1,0 +1,32 @@
+---
+
+- name: AddUsers
+  hosts: all
+  vars:
+      userlist: "{{ lookup('file', 'users.json') | from_json }}"
+  vars_prompt:
+      - name: admin_passwd
+        prompt: "Enter admin password (no prefix)"
+  tasks:
+      - name: addgroup
+        become: yes
+        loop: "{{ userlist }}"
+        ansible.builtin.group:
+                name: "{{ item.username }}"
+                state: present
+        vars:
+                ansible_become_password: "{{ passwd_pfx + admin_passwd }}"
+
+      - name: addusers
+        become: yes
+        loop: "{{ userlist }}"
+        ansible.builtin.user:
+                name: "{{ item.username }}"
+                state: present
+                remove: yes # if absent
+                group: "{{ item.username }}"
+                groups: "{{ item.role_group }}"
+                password: "{{ (passwd_pfx + item.password) | password_hash('md5') }}"
+        vars:
+                ansible_become_password: "{{ passwd_pfx + admin_passwd }}"
+

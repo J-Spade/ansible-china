@@ -1,0 +1,37 @@
+all:
+    children:
+
+        intel:
+            vars:
+                passwd_pfx: "5v;"
+            hosts:
+                # TODO: join this thing to the dang domain
+                nanchong:
+                    ansible_python_interpreter: "python2"
+
+        telecom:
+            vars:
+                passwd_pfx: "~7y"
+            hosts:
+                shenzhen:
+                wuhan:
+                dongguan:
+                    ansible_python_interpreter: "python2"
+                chongqing:
+                # chengdu (phone)
+                xian:
+
+        robotics:
+            vars:
+               passwd_pfx: "N-)"
+            hosts:
+                suzhou:
+                shantou:
+                jinan:
+                zhengzhou:
+
+        samba_shares:
+            hosts:
+                wuhan:
+                suzhou:
+

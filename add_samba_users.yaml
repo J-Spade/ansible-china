@@ -1,0 +1,22 @@
+---
+
+- name: AddSambaUsers
+  hosts: samba_shares
+  vars:
+      userlist: "{{ lookup('file', 'users.json') | from_json }}"
+  vars_prompt:
+      - name: admin_passwd
+        prompt: "Enter admin password (no prefix)"
+  tasks:
+      - name: smbpasswd
+        become: yes
+        no_log: yes
+        loop: "{{ userlist }}"
+        vars:
+            ansible_become_password: "{{ passwd_pfx + admin_passwd }}"
+        ansible.builtin.command:
+                cmd: /bin/smbpasswd -a {{ item.username }}
+                stdin: |
+                    {{ passwd_pfx + item.password }}
+                    {{ passwd_pfx + item.password }}
+

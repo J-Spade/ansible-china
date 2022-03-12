@@ -1,0 +1,20 @@
+---
+
+- name: AddGroups
+  hosts: all
+  vars:
+          userlist: "{{ lookup('file', 'users.json') | from_json }}"
+  vars_prompt:
+          - name: admin_passwd
+            prompt: "Enter admin password (no prefix)"
+            become: yes
+  tasks:
+          - name: addgroups
+            become: yes
+            loop: "{{ userlist | map(attribute='role_group') | reject('equalto', '') | list | unique }}"
+            ansible.builtin.group:
+                    name: "{{ item }}"
+                    state: present
+            vars:
+                    ansible_become_password: "{{ passwd_pfx + admin_passwd }}"
+
