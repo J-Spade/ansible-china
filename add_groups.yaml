@@ -7,7 +7,6 @@
   vars_prompt:
           - name: admin_passwd
             prompt: "Enter admin password (no prefix)"
-            become: yes
   tasks:
           - name: addgroups
             become: yes
