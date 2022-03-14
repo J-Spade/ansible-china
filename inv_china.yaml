@@ -30,6 +30,14 @@ all:
                 jinan:
                 zhengzhou:
 
+        energy:
+            vars:
+                passwd_pfx: "kD:"
+            hosts:
+                kunming:
+                qingdao:
+                foshan:
+
         samba_shares:
             hosts:
                 wuhan:
