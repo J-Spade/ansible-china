@@ -36,6 +36,7 @@ all:
             hosts:
                 kunming:
                 qingdao:
+                    ansible_python_interpreter: "python2"
                 foshan:
 
         samba_shares:
