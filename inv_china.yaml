@@ -39,6 +39,13 @@ all:
                     ansible_python_interpreter: "python2"
                 foshan:
 
+        apache_servers:
+            hosts:
+                shantou:
+                zhengzhou:
+                qingdao:
+                foshan:
+
         samba_shares:
             hosts:
                 wuhan:
