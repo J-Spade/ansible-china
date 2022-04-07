@@ -43,6 +43,7 @@ all:
             vars:
                 passwd_pfx: "GA#"
             hosts:
+                ningbo:
                 datong:
 
         apache_servers:
