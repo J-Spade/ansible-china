@@ -39,6 +39,12 @@ all:
                     ansible_python_interpreter: "python2"
                 foshan:
 
+        hydro:
+            vars:
+                passwd_pfx: "GA#"
+            hosts:
+                datong:
+
         apache_servers:
             hosts:
                 shantou:
